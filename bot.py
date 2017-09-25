@@ -15,7 +15,7 @@ r=praw.Reddit(user_agent="captainmeta4's interface with IRC",
               client_secret=os.environ.get('client_secret')
 
 #command character
-c='+'
+c='$'
 
 
 class Bot():
