@@ -12,7 +12,7 @@ r=praw.Reddit(user_agent="captainmeta4's interface with IRC",
               username='cm4_IRC_interface',
               password=os.environ.get('reddit-password'),
               client_id=os.environ.get('client_id'),
-              client_secret=os.environ.get('client_secret')
+              client_secret=os.environ.get('client_secret'))
 
 #command character
 c='$'
