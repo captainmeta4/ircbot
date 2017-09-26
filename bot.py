@@ -17,6 +17,22 @@ r=praw.Reddit(user_agent="captainmeta4's interface with IRC",
 #command character
 c='$'
 
+class Plugin():
+
+    def __init__(self):
+
+        self.r=r
+
+    def run(self, message):
+
+        #make args
+
+        self.args=message.body.lstrip(c).split()
+
+        for response in self.exe(message):
+
+            message.reply(message.nick+": "+response)
+
 
 class Bot():
 
@@ -65,13 +81,14 @@ class Bot():
 
 
         for name in self.plist:
-            self.plugins[name]=__import__('plugins.%s'%name,fromlist=['plugins'])
+            self.plugins[name]=__import__('plugins.%s'%name,fromlist=['plugins']).Main()
             
             print('imported plugin: '+name)
 
         if refresh:
             for name in old_list:
-                self.plugins[name]=importlib.reload(self.plugins[name])
+                if name in self.plugins:
+                    self.plugins[name]=importlib.reload(__import__('plugins.%s'%name,fromlist=['plugins'])).Main()
             
         
 
@@ -167,9 +184,9 @@ class Bot():
                     continue
 
                 try:
-                    message.reply(self.plugins[self.args[0]].main(message,r))
-                except:
-                    message.reply('%s: something went wrong there'%message.nick)
+                    self.plugins[self.args[0]].run(message)
+                except Exception as e:
+                    message.reply(message.nick+": "+str(e))
 
                 
             

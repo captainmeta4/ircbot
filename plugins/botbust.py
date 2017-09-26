@@ -1,22 +1,23 @@
-def main(message, r, *args):
+from __main__ import Plugin
 
-    arg=message.body.split()
+class Main(Plugin):
 
-    name=arg[1]
+    def exe(self, message):
 
-    account=r.redditor(name)
+        account=self.r.redditor(self.args[1])
 
-    try:
-        x=next(account.new())
-    except:
-        return message.nick+": Can't find the account /u/"+name
+        try:
+            x=next(account.new())
+        except:
+            yield "Can't find the account /u/"+self.args[1]
+            return
 
-    url="http://reddit.com/u/"+name
-    title="Overview for "+name
-    comment="Reported by {} in channel {}".format(message.nick, message.target)
+        url="http://reddit.com/u/"+self.args[1]
+        title="Overview for "+self.args[1]
+        comment="Reported by {} in channel {} on {}".format(message.nick, message.target, message.server.host)
 
-    post=r.subreddit('botbust').submit(title=title,url=url)
+        post=self.r.subreddit('botbust').submit(title=title,url=url)
 
-    post.reply(comment)
+        post.reply(comment)
 
-    return 'http://reddit.com'+post.permalink
+        yield 'http://reddit.com'+post.permalink
