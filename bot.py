@@ -192,8 +192,10 @@ class Bot():
                 continue
 
             #hard code help
-            if message.body.startswith(c+"help"):
+            if message.body==c+"help":
                 self.help(message)
+                continue
+            
 
             #check for admin commands
             if message.nick=="captainmeta4" and message.body.startswith(c):
@@ -210,12 +212,21 @@ class Bot():
             if "/bot/" in message.host:
                 continue
 
-            #now try generic plugin call
+            #now try generic plugin calls
             if message.body.startswith(c):
                 self.args=message.body.lstrip(c).split()
                 if self.args[0] not in self.plugins:
                     continue
 
+                #help
+                elif self.args[0]=="help":
+                    try:
+                        self.plugins[self.args[1]].help(message)
+                    except Exception as e:
+                        message.reply(message.nick+": "+str(e))
+                    continue
+                
+                #now do plugin
                 try:
                     self.plugins[self.args[0]].run(message)
                 except Exception as e:
