@@ -27,7 +27,7 @@ class Main(Plugin):
         #archive it
 
         x=requests.get(save.format(url), headers=headers)
-        if x.status_code = 403:
+        if x.status_code == 403:
             yield "Internet Wayback Machine does not archive that site."
             return
         elif x.status_code != 200:
