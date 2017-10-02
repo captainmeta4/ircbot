@@ -155,10 +155,11 @@ class Bot():
     def help(self, message):
 
         #send a PM to the user with available commands
-        output="List of available commands:\n"
+        output=""
         for plugin in self.plugins:
             output+=plugin
 
+        message.server.speak(message.nick, "List of available commands:")
         message.server.speak(message.nick, output)
 
         
