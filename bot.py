@@ -177,6 +177,10 @@ class Bot():
                     ):
                     continue
 
+            #ignore other bots
+            if "/bot/" in message.host:
+                continue
+
             #now try generic plugin call
             if message.body.startswith(c):
                 self.args=message.body.lstrip(c).split()
