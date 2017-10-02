@@ -27,11 +27,14 @@ class Main(Plugin):
         #archive it
 
         x=requests.get(save.format(url), headers=headers)
-        if x.status_code != 200:
+        if x.status_code = 403:
+            yield "Internet Wayback Machine does not archive that site."
+            return
+        elif x.status_code != 200:
             yield "There was an error archiving your url"
             return
 
-        yield "I have initiated. Try again in a minute or two to see if there's a saved archive page."
+        yield "Archive started. Try again in a minute or two to see if there's a saved archive page."
 
         
 
