@@ -215,16 +215,20 @@ class Bot():
             #now try generic plugin calls
             if message.body.startswith(c):
                 self.args=message.body.lstrip(c).split()
-                if self.args[0] not in self.plugins:
-                    continue
-
+                
                 #help
-                elif self.args[0]=="help":
+                if self.args[0]=="help":
                     try:
                         self.plugins[self.args[1]].help(message)
                     except Exception as e:
                         message.reply(message.nick+": "+str(e))
                     continue
+
+                #bogus commands
+                if self.args[0] not in self.plugins:
+                    continue
+
+
                 
                 #now do plugin
                 try:
