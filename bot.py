@@ -151,7 +151,15 @@ class Bot():
 
         elif args[0]=="send":
             message.server.send(args[1])
-        
+
+    def help(self, message):
+
+        #send a PM to the user with available commands
+        output="List of available commands:\n"
+        for plugin in self.plugins:
+            output+=plugin
+
+        message.server.speak(message.nick, output)
 
         
 
@@ -165,6 +173,10 @@ class Bot():
             if message.nick=="captainmeta4" and message.body==c+"reload":
                 self.reload_plugins(refresh=True)
                 continue
+
+            #hard code help
+            if message.body.startswith(c+"help"):
+                self.help(message)
 
             #check for admin commands
             if message.nick=="captainmeta4" and message.body.startswith(c):
