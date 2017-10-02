@@ -34,6 +34,17 @@ class Plugin():
             message.reply(message.nick+": "+response)
 
 
+    def helptext(self):
+        #this function intended to be overridden in subclasses
+        yield "No help for this function"
+
+    def help(self, message):
+
+        for line in self.helptext():
+            message.reply(message.nick+": "+line)
+        
+
+
 class Bot():
 
     def __init__(self):
@@ -156,8 +167,13 @@ class Bot():
 
         #send a PM to the user with available commands
         output=""
+        p=[]
         for plugin in self.plugins:
-            output+=plugin
+            p.append(plugin)
+
+        p.sort()
+        for name in p:
+            output+=name+" "
 
         message.server.speak(message.nick, "List of available commands:")
         message.server.speak(message.nick, output)

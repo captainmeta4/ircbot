@@ -5,6 +5,11 @@ user_agent="archive plugin for /u/captainmeta4's IRC interface"
 
 class Main(Plugin):
 
+    def helptext(self):
+
+        yield "$archive <url>"
+        yield "Obtain the most recent archive of <url> if it exists, or begin archiving if it does not."
+
     def exe(self, message):
 
         url=self.args[1]

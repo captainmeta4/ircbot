@@ -2,6 +2,11 @@ from __main__ import Plugin
 
 class Main(Plugin):
 
+    def helptext(self):
+
+        yield "$botbust <redditor>"
+        yield "Report /u/<redditor> to /r/BotBust"
+
     def exe(self, message):
 
         account=self.r.redditor(self.args[1])

@@ -2,6 +2,11 @@ from __main__ import Plugin
 
 class Main(Plugin):
 
+    def helptext(self):
+
+        yield "$history <redditor>"
+        yield "See what subreddit /u/<redditor> comments in the most."
+
     def exe(self, message):
 
         account=self.r.redditor(self.args[1])
