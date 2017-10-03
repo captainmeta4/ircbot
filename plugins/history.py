@@ -5,7 +5,7 @@ class Main(Plugin):
     def helptext(self):
 
         yield "$history <redditor>"
-        yield "See what subreddit /u/<redditor> comments in the most."
+        yield "See what domain /u/<redditor> submits to reddit the most."
 
     def exe(self, message):
 
@@ -35,7 +35,7 @@ class Main(Plugin):
                 x=stats[entry]
                 d=entry
 
-        percent=round(100*x/total_posts,2)
+        percent=round(100*x/total_posts,1)
 
         output= "/u/{}'s most commonly submitted domain is {} at {}% of their submission activity."
 
