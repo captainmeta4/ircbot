@@ -20,4 +20,4 @@ class Main(Plugin):
             yield success.format(post.shortlink, post.title)
             return
 
-        yield failure.format(args[1])
+        yield failure.format(self.args[1])

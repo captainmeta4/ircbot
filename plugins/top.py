@@ -12,7 +12,7 @@ class Main(Plugin):
         success = '{} - {}'
         failure = '/r/{} does not have any posts at this time'
 
-        for post in self.r.subreddit(self.args[1]).hot(limit=1):
+        for post in self.r.subreddit(self.args[1]).top(limit=1):
 
             if post.stickied:
                 continue
@@ -20,4 +20,4 @@ class Main(Plugin):
             yield success.format(post.shortlink, post.title)
             return
 
-        yield failure.format(args[1])
+        yield failure.format(self.args[1])
