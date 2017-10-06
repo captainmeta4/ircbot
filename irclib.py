@@ -82,6 +82,11 @@ class Server():
         x= self.s.send(bytes(text+"\r\n", "UTF-8"))
         print('sent to '+self.host+': '+text)
 
+    def notice(self, target, text):
+        lines = text.split('\n\n')
+        for line in lines:
+            self.send("NOTICE {0} :{1}".format(target, text))
+            
     def speak(self, target, text):
         lines = text.split('\n\n')
         for line in lines:

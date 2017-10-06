@@ -184,8 +184,8 @@ class Bot():
         for name in p:
             output+=name+" "
 
-        message.server.speak(message.nick, 'List of available commands. Type "$help <command>" for more information on a specific function')
-        message.server.speak(message.nick, output)
+        message.server.notice(message.nick, 'List of available commands. Type "$help <command>" for more information on a specific function')
+        message.server.notice(message.nick, output)
 
         
 
