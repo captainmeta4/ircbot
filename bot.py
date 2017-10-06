@@ -27,6 +27,11 @@ class Plugin():
         #function to be overridden in subclasses
         pass
 
+    def to_text(self, submission):
+
+        #gives a readable string from a submission object
+        return '{} - {}'.format(submission.shortlink, submission.title)
+
     def run(self, message):
 
         #make args

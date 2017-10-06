@@ -25,4 +25,4 @@ class Main(Plugin):
 
         post.reply(comment)
 
-        yield 'http://reddit.com'+post.permalink
+        yield self.to_text(post)
