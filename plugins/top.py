@@ -18,6 +18,6 @@ class Main(Plugin):
                 continue
 
             yield success.format(post.shortlink, post.title)
+            return
 
-        if not exists:
-            yield failure.format(args[1])
+        yield failure.format(args[1])
