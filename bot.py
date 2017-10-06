@@ -202,7 +202,7 @@ class Bot():
 
             #check for channel invite
             if message.type=="INVITE":
-                message.server.join(message.body)
+                message.server.add_channel(message.body)
                 if message.body not in self.config[message.server.host]['channels']:
                     self.config[message.server.host]['channels'].append(message.body)
                     self.save_config()
