@@ -23,6 +23,10 @@ class Plugin():
 
         self.r=r
 
+    def exe(self, message):
+        #function to be overridden in subclasses
+        pass
+
     def run(self, message):
 
         #make args
@@ -36,7 +40,7 @@ class Plugin():
 
     def helptext(self):
         #this function intended to be overridden in subclasses
-        yield "No help for this function"
+        yield "No help currently available for this function"
 
     def help(self, message):
 
@@ -175,7 +179,7 @@ class Bot():
         for name in p:
             output+=name+" "
 
-        message.server.speak(message.nick, "List of available commands:")
+        message.server.speak(message.nick, 'List of available commands. Type "$help <command>" for more information on a specific function')
         message.server.speak(message.nick, output)
 
         
