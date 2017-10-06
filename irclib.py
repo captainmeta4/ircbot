@@ -208,13 +208,14 @@ class Message():
 
         #regex the raw to extract the message properties
         # https://regex101.com/r/GHg2Ul/2
-        x = re.search("^:((\S+?)!)?((\S+?)@)?(\S+?) ([A-Z]+?) (\S+?)? ?:(.+)$",raw)
+        x = re.search("^:((\S+?)!)?((\S+?)@)?(\S+?) ([A-Z]+?) (\S+?)?( \S+?)? ?:(.*)$",raw)
         self.nick = x.group(2)
         self.userid = x.group(4)
         self.host=x.group(5)
         self.type=x.group(6)
         self.target=x.group(7)
-        self.body = x.group(8)
+        self.secondary_target=x.group(8)
+        self.body = x.group(9)
 
 
     def __str__(self):

@@ -203,6 +203,15 @@ class Bot():
             #check for channel invite
             if message.type=="INVITE":
                 message.server.join(message.body)
+                if message.body not in self.config[message.server.host]['channels']:
+                    self.config[message.server.host]['channels'].append(message.body)
+                    self.save_config()
+
+            #check for channel kick:
+            if message.type=="KICK" and message.secondary_target==message.server.nick:
+                if message.target in self.config[message.server.host]['channels']:
+                    self.config[message.server.host]['channels'].pop(self.config[message.server.host]['channels'].index(message.target))
+                    self.save_config()
 
             #hard code help
             if message.body==c+"help":
