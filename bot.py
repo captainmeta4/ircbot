@@ -200,6 +200,10 @@ class Bot():
                 self.reload_plugins(refresh=True)
                 continue
 
+            #check for channel invite
+            if message.type=="INVITE":
+                message.server.join(message.body)
+
             #hard code help
             if message.body==c+"help":
                 self.help(message)

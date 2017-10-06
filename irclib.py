@@ -54,7 +54,8 @@ class Server():
     def add_channel(self, name):
         x = Channel(self, name)
         x.join()
-        self.channels.append(x)
+        if x not in self.channels:            
+            self.channels.append(x)
 
     def part_channel(self, name):
 
@@ -164,7 +165,6 @@ class Channel():
     
 
     def join(self):
-
         self.server.send("JOIN "+self.name)
 
     def part(self):
