@@ -17,7 +17,7 @@ class Main(Plugin):
             if post.stickied:
                 continue
 
-            yield success.format(post.shortlink, post.title)
+            yield self.to_text(post)
             return
 
         yield failure.format(self.args[1])

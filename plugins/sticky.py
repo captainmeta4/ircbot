@@ -11,14 +11,13 @@ class Main(Plugin):
 
         exists=False
 
-        success = '{} - {}'
         failure = '/r/{} does not have any stickied posts at this time'
 
         for post in self.r.subreddit(self.args[1]).hot(limit=2):
 
             if post.stickied:
                 exists=True
-                yield success.format(post.shortlink, post.title)
+                yield self.to_text(post)
 
         if not exists:
             yield failure.format(args[1])
