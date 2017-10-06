@@ -7,7 +7,7 @@ class Main(Plugin):
     def helptext(self):
 
         yield "$markov <redditor>"
-        yield "Generates a Markov sentence based on /u/<reditor>"
+        yield "Generates a Markov sentence based on /u/<redditor>"
 
     def text_to_triples(self, text):
         #generates triples given text
@@ -73,7 +73,7 @@ class Main(Plugin):
         self.lengths = []
         
         #for every comment
-        for comment in user.comments.new(limit=200):
+        for comment in user.comments.new(limit=300):
 
             #ignore mod comments
             if comment.distinguished == "moderator":
