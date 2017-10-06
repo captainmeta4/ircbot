@@ -73,7 +73,7 @@ class Main(Plugin):
         self.lengths = []
         
         #for every comment
-        for comment in user.comments.new(limit=100):
+        for comment in user.comments.new(limit=200):
 
             #ignore mod comments
             if comment.distinguished == "moderator":
