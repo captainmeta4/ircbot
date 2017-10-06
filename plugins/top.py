@@ -1,6 +1,6 @@
 from __main__ import Plugin
 
-class main(Plugin):
+class Main(Plugin):
 
     def helptext(self):
 
