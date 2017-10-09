@@ -26,7 +26,7 @@ class Plugin():
 
         self.on_start()
 
-    def on_start():
+    def on_start(self):
         #function to be overridden in subclass
         pass
 
