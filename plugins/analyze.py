@@ -28,7 +28,7 @@ class Main(Plugin):
         #examine comments for links
         for comment in account.comments.new(limit=100):
 
-            $find links
+            #find links
             links=re.findall('https?://([\w.-]+)', comment.body)
 
             for link in links:
