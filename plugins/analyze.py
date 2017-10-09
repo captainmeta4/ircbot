@@ -32,13 +32,18 @@ class Main(Plugin):
             links=re.findall('https?://([\w.-]+)', comment.body)
 
             for link in links:
+
+                #consolidate for readibility and better stats
+                if link.startswith('www.'):
+                    link=link.lstrip('w.')
+
+                #add to stats
                 if link in stats:
                     stats[link]+=1
                 elif link not in stats:
                     stats[link]=1
 
             i+=1
-
         
         #list links in reverse order of frequency
         link_list=sorted(stats, key=stats.get, reverse=True)
@@ -57,7 +62,7 @@ class Main(Plugin):
         yield "In {} comments, /u/{} has included links to the following sites:".format(str(i),self.args[1])
 
         for entry in link_list:
-            output = entry
+            output = 'https://'+entry
             output += " "*(l-len(entry)+1)+"| "
             output += str(stats[entry])
             yield output
