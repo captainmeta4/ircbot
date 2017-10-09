@@ -37,7 +37,7 @@ class Main(Plugin):
         params={'key':self.key,
                 'text':text,
                 'lang':self.args[1],
-                'format':plain}
+                'format':'plain'}
         url='https://translate.yandex.net/api/v1.5/tr.json/translate'
 
         #hit translation api
