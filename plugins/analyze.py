@@ -82,7 +82,7 @@ class Main(Plugin):
                    'api_paste_title':title,
                    'api_paste_private':1}
 
-        response = requests.post(url,data=payload,headers=headers)
+        response = requests.post(url,data=payload,headers=self.headers)
         yield response.content.decode('utf-8')
 
         
