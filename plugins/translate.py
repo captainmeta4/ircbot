@@ -14,7 +14,7 @@ class Main(Plugin):
         params = {'key': self.key,
                   'ui':'en'}
         x=requests.get(url,params=params, headers=self.headers)
-        self.langs=x.content.decode('utf-8')
+        self.langs=x.json()
 
     def helptext(self):
 
