@@ -84,7 +84,7 @@ class Main(Plugin):
         payload = {'api_dev_key':self.key,
                    'api_option':'paste',
                    'api_paste_code':text,
-                   'api_paste_title':title,
+                   'api_paste_name':title,
                    'api_paste_private':1,
                    'api_paste_expire_date':'1W'}
 
