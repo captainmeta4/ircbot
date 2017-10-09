@@ -19,7 +19,7 @@ class Main(Plugin):
     def helptext(self):
 
         yield "$translate <language> <text>"
-        yield "Translate <text> to <language> using Yandex translation engine."
+        yield "Translate <text> to <language> using Yandex.Translate."
 
         
     def exe(self, message):
@@ -28,6 +28,16 @@ class Main(Plugin):
 
         if self.args[1] not in self.langs['langs']:
             yield 'Target language not specified.'
+            self.notice=True
+            yield "Supported Languages:"
+            for lang in self.langs['langs']:
+                output=lang
+                if len(lang)==2:
+                    output+=" "
+                output +=" - "
+                output +=self.langs['langs'][lang]
+                yield output
+            self.notice=False
             return
 
         #get text to translate
