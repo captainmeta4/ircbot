@@ -28,7 +28,8 @@ class Main(Plugin):
 
         if self.args[1] not in self.langs['langs']:
             yield 'Target language not specified or not supported. List of supported languages: https://redd.it/74q0mj'
-
+            return
+        
         #get text to translate
         text=message.body.split(maxsplit=2)[2]
 
