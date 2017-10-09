@@ -58,7 +58,7 @@ class Main(Plugin):
 
         yield "In {} comments, /u/{} has included links to the following sites:".format(str(i),self.args[1])
 
-        for entry in link_list:
+        for entry in link_list[0,10]:
             output = 'https://'+entry
             output += " "*(l-len(entry)+1)+"| "
             output += str(stats[entry])
