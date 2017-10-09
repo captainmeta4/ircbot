@@ -58,7 +58,7 @@ class Main(Plugin):
 
         for entry in link_list:
             output = entry
-            output += " "*(l-len(entry)+1)+"| |
+            output += " "*(l-len(entry)+1)+"| "
             output += str(stats[entry])
             yield output
 
