@@ -27,9 +27,7 @@ class Main(Plugin):
         #valid languages
 
         if self.args[1] not in self.langs['langs']:
-            yield 'Target language not specified.'
-            message.server.speak(message.nick, "Supported Languages:")
-            message.server.speak(message.nick,str(self.langs['langs']))
+            yield 'Target language not specified or not supported. List of supported languages: https://redd.it/74q0mj'
 
         #get text to translate
         text=message.body.split(maxsplit=2)[2]
