@@ -31,7 +31,7 @@ class Main(Plugin):
             return
 
         #get text to translate
-        text=message.body.split(maxsplit=2)
+        text=message.body.split(maxsplit=2)[2]
 
         #Assemble params for translation
         params={'key':self.key,
