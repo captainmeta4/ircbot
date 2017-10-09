@@ -9,7 +9,6 @@ class Main(Plugin):
 
         self.key=os.environ.get('pastebin_api_dev_key')
         self.headers={'User-Agent': "captainmeta4 irc interface"}
-        self.url='https://pastebin.com/api/api_post.php'
 
     def helptext(self):
 
@@ -76,10 +75,12 @@ class Main(Plugin):
 
         #assemble payload
         title= "Comment analysis for /u/"+self.args[1]
+        url='https://pastebin.com/api/api_post.php'
         payload = {'api_dev_key':self.key,
                    'api_option':'paste',
                    'api_paste_code':text,
-                   'api_paste_title':title}
+                   'api_paste_title':title,
+                   'api_paste_private':1}
 
         response = requests.post(url,data=payload,headers=headers)
         yield response.content.decode('utf-8')
