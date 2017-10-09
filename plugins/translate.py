@@ -28,9 +28,9 @@ class Main(Plugin):
 
         if self.args[1] not in self.langs['langs']:
             yield 'Target language not specified.'
-            message.server.speak(message.nick, "Supported Languages:")
+            message.server.notice(message.nick, "Supported Languages:")
             for lang in self.langs['langs']:
-                message.server.speak(message.nick,lang+" - "self.langs['langs'][lang])
+                message.server.notice(message.nick,lang+" - "+self.langs['langs'][lang])
             return
 
         #get text to translate
