@@ -30,7 +30,7 @@ class Main(Plugin):
         i=0
 
         #examine content for links
-        for thing in account.overview(limit=100):
+        for thing in account.new(limit=100):
 
             #figure out where to look for links
 
