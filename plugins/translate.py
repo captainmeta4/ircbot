@@ -31,12 +31,7 @@ class Main(Plugin):
             self.notice=True
             yield "Supported Languages:"
             for lang in self.langs['langs']:
-                output=lang
-                if len(lang)==2:
-                    output+=" "
-                output +=" - "
-                output +=self.langs['langs'][lang]
-                yield output
+                yield lang+" - "self.langs['langs'][lang]
             self.notice=False
             return
 
