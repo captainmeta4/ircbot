@@ -10,9 +10,6 @@ class Main(Plugin):
 
     def exe(self, message):
 
-        #set plugin to respond as a notice
-        self.notice=True
-
         #find the redditor
         account=self.r.redditor(self.args[1])
 
