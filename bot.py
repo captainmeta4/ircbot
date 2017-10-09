@@ -108,11 +108,9 @@ class Bot():
 
             try:
                 self.plugins[name]=__import__('plugins.%s'%name,fromlist=['plugins']).Main()
+                print('imported plugin: '+name)
             except Exception as e:
                 print('could not import {}: {}'.format(name, str(e)))
-                
-                      
-            print('imported plugin: '+name)
 
         if refresh:
             for name in old_list:
