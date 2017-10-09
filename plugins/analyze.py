@@ -29,11 +29,15 @@ class Main(Plugin):
         stats={}
         i=0
 
-        #examine comments for links
-        for comment in account.comments.new(limit=100):
+        #examine content for links
+        for thing in account.overview(limit=100):
+
+            #figure out where to look for links
+
+            text=getattr(thing, 'body', getattr(thing, 'selftext', getattr(thing, 'url', None)))
 
             #find links
-            links=re.findall('https?://([\w.-]+)', comment.body)
+            links=re.findall('https?://([\w.-]+)', text)
 
             for link in links:
 
@@ -46,6 +50,7 @@ class Main(Plugin):
                     stats[link]+=1
                 elif link not in stats:
                     stats[link]=1
+
 
             i+=1
 
@@ -63,7 +68,7 @@ class Main(Plugin):
         for entry in link_list:
             l=max(l,len(entry))
 
-        text= "In {} comments, /u/{} has included links to the following sites:".format(str(i),self.args[1])
+        text= "In {} posts or comments, /u/{} has included links to the following sites:".format(str(i),self.args[1])
 
         #assemble the text of the response
         for entry in link_list:
@@ -74,13 +79,14 @@ class Main(Plugin):
 
 
         #assemble payload
-        title= "Comment analysis for /u/"+self.args[1]
+        title= "Activity analysis for /u/"+self.args[1]
         url='https://pastebin.com/api/api_post.php'
         payload = {'api_dev_key':self.key,
                    'api_option':'paste',
                    'api_paste_code':text,
                    'api_paste_title':title,
-                   'api_paste_private':1}
+                   'api_paste_private':1,
+                   'api_paste_expire_date':'1W'}
 
         response = requests.post(url,data=payload,headers=self.headers)
         yield response.content.decode('utf-8')
