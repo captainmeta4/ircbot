@@ -1,7 +1,15 @@
 from __main__ import Plugin
 import re
+import requests
+import os
 
 class Main(Plugin):
+
+    def on_start(self):
+
+        self.key=os.environ.get('pastebin_api_dev_key')
+        self.headers={'User-Agent': "captainmeta4 irc interface"}
+        self.url='https://pastebin.com/api/api_post.php'
 
     def helptext(self):
 
@@ -41,6 +49,12 @@ class Main(Plugin):
                     stats[link]=1
 
             i+=1
+
+
+        #jump out if no meaningful results
+        if len(stats)==0:
+            yield "/u/"+self.args[1]+" has no links in comments."
+            return
         
         #list links in reverse order of frequency
         link_list=sorted(stats, key=stats.get, reverse=True)
@@ -49,20 +63,26 @@ class Main(Plugin):
         l=0
         for entry in link_list:
             l=max(l,len(entry))
-            
 
-        yield "comment analysis for /u/"+self.args[1]
-        if len(link_list)==0:
-            yield "/u/"+self.args[1]+" has no links in comments."
-            return
+        text= "In {} comments, /u/{} has included links to the following sites:".format(str(i),self.args[1])
 
-        yield "In {} comments, /u/{} has included links to the following sites:".format(str(i),self.args[1])
-
-        for entry in link_list[0:10]:
+        #assemble the text of the response
+        for entry in link_list:
             output = 'https://'+entry
             output += " "*(l-len(entry)+1)+"| "
             output += str(stats[entry])
-            yield output
+            text+="\n"+output
+
+
+        #assemble payload
+        title= "Comment analysis for /u/"+self.args[1]
+        payload = {'api_dev_key':self.key,
+                   'api_option':'paste',
+                   'api_paste_code':text,
+                   'api_paste_title':title}
+
+        response = requests.post(url,data=payload,headers=headers)
+        yield response.content.decode('utf-8')
 
         
                     

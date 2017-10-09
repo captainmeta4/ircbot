@@ -24,6 +24,12 @@ class Plugin():
         self.r=r
         self.notice=False
 
+        self.on_start()
+
+    def on_start():
+        #function to be overridden in subclass
+        pass
+
     def exe(self, message):
         #function to be overridden in subclasses
         pass
