@@ -22,6 +22,7 @@ class Plugin():
     def __init__(self):
 
         self.r=r
+        self.notice=False
 
     def exe(self, message):
         #function to be overridden in subclasses
@@ -40,7 +41,10 @@ class Plugin():
 
         for response in self.exe(message):
 
-            message.reply(message.nick+": "+response)
+            if not self.notice:
+                message.reply(message.nick+": "+response)
+            elif self.notice:
+                message.server.notice(message.nick, response)
 
 
     def helptext(self):
@@ -101,8 +105,13 @@ class Bot():
 
 
         for name in self.plist:
-            self.plugins[name]=__import__('plugins.%s'%name,fromlist=['plugins']).Main()
-            
+
+            try:
+                self.plugins[name]=__import__('plugins.%s'%name,fromlist=['plugins']).Main()
+            except Exception as e:
+                print('could not import {}: {}'.format(name, str(e))
+                
+                      
             print('imported plugin: '+name)
 
         if refresh:
