@@ -67,7 +67,7 @@ class Main(Plugin):
 
         #assemble the text of the response
         for entry in link_list:
-            output = 'https://'+entry
+            output = entry
             output += " "*(l-len(entry)+1)+"| "
             output += str(stats[entry])
             text+="\n"+output
