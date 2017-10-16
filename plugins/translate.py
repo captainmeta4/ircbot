@@ -6,7 +6,7 @@ class Main(Plugin):
 
     def on_start(self):
 
-        self.key=os.environ.get('yandex_key')
+        self.key=self.get_key('yandex')
         self.headers={"User-Agent":"Translation Module for captainmeta4 IRC Interface"}
         
         #get supported languages

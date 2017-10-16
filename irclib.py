@@ -118,7 +118,7 @@ class Server():
                 linelist=line.split()
                 if(linelist[0]=="PING"):
                     print(line)
-                    self.send("PONG {}\r\n".format(linelist[1]))
+                    self.send("PONG {}".format(linelist[1]))
                     continue
                 
                 line=line.rstrip()
@@ -139,7 +139,7 @@ class Server():
             linelist=line.split()       
             if(linelist[0]=="PING"):
                 print(line)
-                self.send("PONG %s\r\n" % linelist[1])
+                self.send("PONG %s" % linelist[1])
                 continue
                 
             line=line.rstrip()

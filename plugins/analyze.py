@@ -1,13 +1,13 @@
 from __main__ import Plugin
 import re
 import requests
-import os
+import json
 
 class Main(Plugin):
 
     def on_start(self):
 
-        self.key=os.environ.get('pastebin_api_dev_key')
+        self.key=self.get_key('pastebin')
         self.headers={'User-Agent': "captainmeta4 irc interface"}
 
     def helptext(self):

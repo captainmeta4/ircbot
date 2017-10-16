@@ -5,14 +5,10 @@ import yaml
 import plugins
 from pathlib import Path
 import importlib
-import os
+from os import environ
 
 #set globals
-r=praw.Reddit(user_agent="captainmeta4's interface with IRC",
-              username='cm4_IRC_interface',
-              password=os.environ.get('reddit-password'),
-              client_id=os.environ.get('client_id'),
-              client_secret=os.environ.get('client_secret'))
+r=praw.Reddit('ircbot')
 
 #command character
 c='$'
@@ -25,6 +21,13 @@ class Plugin():
         self.notice=False
 
         self.on_start()
+
+    def get_key(self, key):
+
+        with open(environ['HOME']+'/keys.txt') as f:
+            data=yaml.safe_load(f.read())
+
+        return data['keys'][key]
 
     def on_start(self):
         #function to be overridden in subclass
@@ -114,15 +117,19 @@ class Bot():
 
             try:
                 self.plugins[name]=__import__('plugins.%s'%name,fromlist=['plugins']).Main()
-                print('imported plugin: '+name)
+                if  not refresh:
+                    print('imported plugin: '+name)
             except Exception as e:
                 print('could not import {}: {}'.format(name, str(e)))
 
         if refresh:
             for name in old_list:
                 if name in self.plugins:
-                    self.plugins[name]=importlib.reload(__import__('plugins.%s'%name,fromlist=['plugins'])).Main()
-            
+                    try:
+                        self.plugins[name]=importlib.reload(__import__('plugins.%s'%name,fromlist=['plugins'])).Main()
+                        print('reloaded plugin: '+name)
+                    except Exception as e:
+                        print('could not reload {}: {}'.format(name, str(e)))
         
 
     def load_config(self):
