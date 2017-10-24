@@ -1,6 +1,5 @@
 from __main__ import Plugin
 import requests
-import os
 
 class Main(Plugin):
 
