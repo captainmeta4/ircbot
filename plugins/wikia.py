@@ -1,4 +1,4 @@
-rom __main__ import Plugin
+from __main__ import Plugin
 import requests
 
 class Main(Plugin):
