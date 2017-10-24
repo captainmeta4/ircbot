@@ -5,7 +5,8 @@ class Main(Plugin):
 
     def on_start(self):
 
-        self.api="http://{}.wikia.com/api/v1/Search/List/"
+        self.api_search="http://{}.wikia.com/api/v1/Search/List/"
+        self.api_article="http://{}.wikia.com/api/v1/Articles/Details/"
         self.headers={"User-Agent":"ircBot by /u/captainmeta4 for snoonet"}
 
     def helptext(self):
@@ -22,7 +23,7 @@ class Main(Plugin):
         query=self.args[2]
 
         #set url and params
-        url=self.api.format(site)
+        url=self.api_search.format(site)
         params={'query':query,
             'limit':25,
             'lang':'en',
@@ -43,10 +44,25 @@ class Main(Plugin):
         if 'http://community.wikia.com/wiki/Community_Central:Not_a_valid_community?' in x.url:
             yield '{}.wikia.com does not exist'.format(site)
 
-        j=x.json()
-        page=j['items'][0]
+        #get id of top result
+        i=x.json()['items'][0]['id']
+        
 
-        output = '{}: {} - {}'.format(page['title'],page['url'],page['snippet'][0:50])
+        #now load the abstract of the search result
+        url=self.api_article.format(site)
+        params={'ids':i,
+                'lang':'en',
+                'abstract':100}
+        x=requests.get(url,params=params,headers=self.headers)
+        
+        info=x.json()['items'][i]
+
+        title=info['title']
+        url=info['url']
+        abstract=info['abstract']
+        
+
+        output = '{}: {} - {}'.format(title,url,abstract)
         yield output
 
         
