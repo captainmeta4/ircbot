@@ -15,7 +15,7 @@ class Main(Plugin):
 
     def exe(self, message):
 
-        query = message.split(maxsplit=1)[1]
+        query = message.body.split(maxsplit=1)[1]
 
         params={'action':'opensearch',
                 'list':'search',
@@ -25,9 +25,17 @@ class Main(Plugin):
         x = requests.get(self.api, params=params, headers=self.headers)
 
         data = x.json()
-        result = data[query][0]
+        #check for no results found
+        if len(data[1]) == 0:
+            yield 'No results found for "{}" on wikipedia'.format(query)
+            return
+        
+        result = data[1][0]
+        text = data[2][0][0:100]
 
-        yield "https://en.wikipedia.org/wiki/{}".format(result)
+
+
+        yield "https://en.wikipedia.org/wiki/{} - {}".format(result, text)
 
 
 
