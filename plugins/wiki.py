@@ -17,12 +17,12 @@ class Main(Plugin):
 
         query = message.split(maxsplit=1)[1]
 
-        params={'action':'query',
+        params={'action':'opensearch',
                 'list':'search',
                 'search':query,
                 'format':'json'}
 
-        x = requests.get(self.api, headers=self,headers)
+        x = requests.get(self.api, params=params, headers=self.headers)
 
         data = x.json()
         result = data[query][0]
