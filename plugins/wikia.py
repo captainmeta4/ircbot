@@ -43,6 +43,7 @@ class Main(Plugin):
         #check for invalid community
         if 'http://community.wikia.com/wiki/Community_Central:Not_a_valid_community?' in x.url:
             yield '{}.wikia.com does not exist'.format(site)
+            return
 
         #get id of top result
         i=x.json()['items'][0]['id']
@@ -62,7 +63,8 @@ class Main(Plugin):
         abstract=info['abstract']
         
 
-        output = '{}: {} - {}'.format(title,url,abstract)
+        output = '{}: {} - {}'.format(title, url, abstract)
+        
         yield output
 
         
