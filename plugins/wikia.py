@@ -45,8 +45,10 @@ class Main(Plugin):
             yield '{}.wikia.com does not exist'.format(site)
             return
 
-        #get id of top result
-        i=x.json()['items'][0]['id']
+        #get info of top result
+        page=x.json()['items'][0]
+        page_url=page['url']
+        i=page['id']
         
 
         #now load the abstract of the search result
@@ -55,16 +57,13 @@ class Main(Plugin):
                 'lang':'en',
                 'abstract':100}
         x=requests.get(url,params=params,headers=self.headers)
-        
-        info=x.json()['items'][i]
+
+        info=x.json()['items'][str(i)]
 
         title=info['title']
-        url=info['url']
         abstract=info['abstract']
         
-
         output = '{}: {} - {}'.format(title, url, abstract)
-        
         yield output
 
         

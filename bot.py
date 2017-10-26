@@ -277,7 +277,7 @@ class Bot():
                     self.plugins[self.args[0]].run(message)
                 except Exception as e:
                     message.reply(message.nick+": "+str(e))
-                    self.plugins[self.args[0].help(message)]
+                    
 
                 
             
