@@ -60,10 +60,13 @@ class Main(Plugin):
 
         info=x.json()['items'][str(i)]
 
+        print(info)
+
         title=info['title']
+        url=info['url']
         abstract=info['abstract']
         
-        output = '{}: {} - {}'.format(title, url, abstract)
+        output = '{}: https://{}.wikia.com{} - {}'.format(title, site, url, abstract)
         yield output
 
         
