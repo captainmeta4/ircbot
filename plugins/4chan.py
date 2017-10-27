@@ -35,12 +35,13 @@ class Main(Plugin):
         x=requests.get(self.api.format(board), headers=self.headers)
         data=x.json()
 
+        i=0
         for thread in data[0]['threads']:
             #ignore stickies
             if 'sticky' in thread:
                 continue
 
-            sub=thread.get('sub','[no subject]')
+            subject=thread.get('sub','[no subject]')
             number=thread['no']
 
             response_url = self.reply_url.format(board,number)
@@ -48,7 +49,11 @@ class Main(Plugin):
             reply = self.reply.format(response_url, subject)
 
             yield reply
-            return
+            i+=1
+            if i>=3:
+                break
+            
+        return
 
             
             
