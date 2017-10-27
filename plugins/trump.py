@@ -7,7 +7,7 @@ class Main(Plugin):
     def helptext(self):
 
         yield "$trump"
-        yield "Generates a random Trump phrase."
+        yield "Generates a random Donald Trump phrase."
 
     def on_start(self):
 
