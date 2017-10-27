@@ -22,7 +22,7 @@ class Main(Plugin):
         yield "$4chan <board>"
         yield "Retrieves the top non-sticky post from /<board>/. Results may be NSFW"
 
-    def exe(self, message)
+    def exe(self, message):
 
         board = self.args[1]
 
