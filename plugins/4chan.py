@@ -1,0 +1,55 @@
+from __main__ import Plugin
+import requests
+
+class Main(Plugin):
+
+    def on_start(self):
+
+        self.api='https://a.4cdn.org/{}/catalog.json'
+        self.headers = {"User-Agent":"snoonet ircbot by anon"}
+        self.reply_url='http://a.4cdn.org/{}/thread/{}.json'
+        self.reply = "{} - {}"
+
+        
+
+        #load list of boards
+        self.boards=[]
+        for board in requests.get('https://a.4cdn.org/boards.json',headers=self.headers).json()['boards']:
+            self.boards.append(board['board'])
+
+    def helptext(self):
+
+        yield "$4chan <board>"
+        yield "Retrieves the top non-sticky post from /<board>/. Results may be NSFW"
+
+    def exe(self, message)
+
+        board = self.args[1]
+
+        if board not in self.boards:
+            yield "/{}/ does not exist"
+            return
+
+        #get top posts
+
+        x=requests.get(self.api.format(board), headers=self.headers)
+        data=x.json()
+
+        for thread in data['threads']:
+            #ignore stickies
+            if 'sticky' in thread:
+                continue
+
+            subject=getattr(thread,'sub','[no subject]')
+            number=thread['no']
+
+            response_url = self.reply_url.format(board,number)
+
+            reply = self.reply.format(response_url, subject)
+
+            yield reply
+
+            
+            
+
+        
