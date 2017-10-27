@@ -7,7 +7,7 @@ class Main(Plugin):
 
         self.api='https://a.4cdn.org/{}/catalog.json'
         self.headers = {"User-Agent":"snoonet ircbot by anon"}
-        self.reply_url='http://a.4cdn.org/{}/thread/{}.json'
+        self.reply_url='http://boards.4chan.org/{}/thread/{}'
         self.reply = "{} - {}"
 
         
@@ -35,7 +35,7 @@ class Main(Plugin):
         x=requests.get(self.api.format(board), headers=self.headers)
         data=x.json()
 
-        for thread in data['threads']:
+        for thread in data[0]['threads']:
             #ignore stickies
             if 'sticky' in thread:
                 continue
