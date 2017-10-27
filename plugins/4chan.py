@@ -40,7 +40,7 @@ class Main(Plugin):
             if 'sticky' in thread:
                 continue
 
-            subject=getattr(thread,'sub','[no subject]')
+            sub=thread.get('sub','[no subject]')
             number=thread['no']
 
             response_url = self.reply_url.format(board,number)
@@ -48,6 +48,7 @@ class Main(Plugin):
             reply = self.reply.format(response_url, subject)
 
             yield reply
+            return
 
             
             
