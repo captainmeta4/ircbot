@@ -5,6 +5,7 @@ import plugins
 from pathlib import Path
 import importlib
 import threading
+from os import environ
 
 
 #set globals
