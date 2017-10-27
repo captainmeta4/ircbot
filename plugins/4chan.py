@@ -27,7 +27,7 @@ class Main(Plugin):
         board = self.args[1]
 
         if board not in self.boards:
-            yield "/{}/ does not exist"
+            yield "/{}/ does not exist".format(board)
             return
 
         #get top posts
