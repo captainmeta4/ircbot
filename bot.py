@@ -51,7 +51,10 @@ class Plugin():
         for response in self.exe(message):
 
             if not self.notice:
-                message.reply(message.nick+": "+response)
+                if message.target.startswith('#'):                    
+                    message.reply(message.nick+": "+response)
+                else:
+                    message.reply(response)
             elif self.notice:
                 message.server.notice(message.nick, response)
 
@@ -63,7 +66,10 @@ class Plugin():
     def help(self, message):
 
         for line in self.helptext():
-            message.reply(message.nick+": "+line)
+            if message.target.startswith('#'):
+                message.reply(message.nick+": "+line)
+            else:
+                message.reply(line)
         
 
 
