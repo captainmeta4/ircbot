@@ -20,7 +20,7 @@ class Main(Plugin):
     def helptext(self):
 
         yield "$4chan <board>"
-        yield "Retrieves the top non-sticky post from /<board>/. Results may be NSFW"
+        yield "Retrieves the top 3 non-sticky post from /<board>/. Results may be NSFW"
 
     def exe(self, message):
 

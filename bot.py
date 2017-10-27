@@ -1,11 +1,11 @@
 import praw
-import os
 import irclib
 import yaml
 import plugins
 from pathlib import Path
 import importlib
-from os import environ
+import threading
+
 
 #set globals
 r=praw.Reddit('ircbot')
@@ -280,7 +280,8 @@ class Bot():
                 
                 #now do plugin
                 try:
-                    self.plugins[self.args[0]].run(message)
+                    t=threading.Thread(target=self.plugins[self.args[0]].run, args=(message))
+                    t.start()
                 except Exception as e:
                     message.reply(message.nick+": "+str(e))
                     
