@@ -13,7 +13,7 @@ class Main(Plugin):
     def helptext(self):
 
         yield "$analyze <redditor>"
-        yield "See what domains /u/<redditor> links to the most within comments."
+        yield "See what domains /u/<redditor> links to the most within comments and posts."
 
     def exe(self, message):
 
@@ -30,11 +30,20 @@ class Main(Plugin):
         i=0
 
         #examine content for links
-        for thing in account.new(limit=100):
+        for thing in account.new(limit=1000):
 
             #figure out where to look for links
+            if thing.fullname.startswith("t1_"):
+                text=thing.body
+            elif thing.fullname.startswith('t3_'):
+                if not thing.domain.startswith('self.'):
+                    text=thing.url
+                else:
+                    text=thing.selftext
+            else:
+                #something's fucked
+                continue
 
-            text=getattr(thing, 'body', getattr(thing, 'selftext', getattr(thing, 'url', None)))
 
             #find links
             links=re.findall('https?://([\w.-]+)', text)

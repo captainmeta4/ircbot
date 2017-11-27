@@ -264,6 +264,10 @@ class Bot():
             #now try generic plugin calls
             if message.body.startswith(c):
                 self.args=message.body.lstrip(c).split()
+
+                #prevent crash on comments consisting solely of $
+                if len(self.args)==0:
+                    continue
                 
                 #help
                 if self.args[0]=="help":
