@@ -9,9 +9,9 @@ class Main(Plugin):
 
     def exe(self, message):
 
-        self.args = message.body.split(maxsplit=2)
+        args = message.body.split(maxsplit=2)
 
-        for post in self.r.subreddit(self.args[1]).search(self.args[2], limit=1):
+        for post in self.r.subreddit(args[1]).search(args[2], limit=1):
 
             yield self.to_text(post)
             return

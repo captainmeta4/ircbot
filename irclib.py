@@ -109,7 +109,7 @@ class Server():
     def listen_raw(self):
         readbuffer=""
         while True:
-            readbuffer=readbuffer+str(self.s.recv(1024), "UTF-8")
+            readbuffer=readbuffer+str(self.s.recv(1024), "UTF-8", errors='replace')
             temp=readbuffer.split("\r\n")
             readbuffer=temp.pop()
 
@@ -127,7 +127,7 @@ class Server():
 
     def listen_line(self):
         try:
-            self.readbuffer=self.readbuffer+str(self.s.recv(1024), "UTF-8")
+            self.readbuffer=self.readbuffer+str(self.s.recv(1024), "UTF-8", errors='replace')
         except BlockingIOError:
             return
         temp=self.readbuffer.split("\r\n")
