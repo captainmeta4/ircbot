@@ -23,12 +23,12 @@ class Plugin():
 
         self.on_start()
 
-    def is_captainmetaphor(self, message)
+    def is_captainmetaphor(self, message):
 
         if message.nick != "captainmeta4":
             return False
 
-        if message.host != "user/captainmeta4"
+        if message.host != "user/captainmeta4":
             return false
 
         return True
