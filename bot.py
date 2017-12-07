@@ -23,6 +23,16 @@ class Plugin():
 
         self.on_start()
 
+    def is_captainmetaphor(self, message)
+
+        if message.nick != "captainmeta4":
+            return False
+
+        if message.host != "user/captainmeta4"
+            return false
+
+        return True
+
     def get_key(self, key):
 
         with open(environ['HOME']+'/keys.txt') as f:
