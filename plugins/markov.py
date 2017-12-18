@@ -63,7 +63,7 @@ class Main(Plugin):
             
         return(output)
 
-    def generate_corpus(self, user):
+    def clear_corpus(self):
 
         #loads comments and generates a dictionary of
         #  {('word1','word2'): ['word3','word4','word5'...]...}
@@ -71,6 +71,8 @@ class Main(Plugin):
         self.corpus = {}
         self.starters = []
         self.lengths = []
+
+    def generate_corpus(self, user)
         
         #for every comment
         for comment in user.comments.new(limit=300):
@@ -101,9 +103,14 @@ class Main(Plugin):
 
     def exe(self, message):
 
-        user=self.r.redditor(self.args[1])
+        self.clear_corpus()
+
+        args = message.body.split(maxsplit=1)
+        users=args[1].split()
 
         #generate corpus
-        self.generate_corpus(user)
+        for user in users:
+            self.generate_corpus(self.r.redditor(user))
+            
         yield self.generate_text()
         
