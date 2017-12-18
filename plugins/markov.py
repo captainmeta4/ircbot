@@ -72,7 +72,7 @@ class Main(Plugin):
         self.starters = []
         self.lengths = []
 
-    def generate_corpus(self, user)
+    def generate_corpus(self, user):
         
         #for every comment
         for comment in user.comments.new(limit=300):
