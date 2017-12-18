@@ -23,7 +23,7 @@ class Main(Plugin):
             return
 
         #make praw instance as captainmeta4
-        r=praw.Reddit('me')
+        r=praw.Reddit('captainmeta4')
 
 
 
